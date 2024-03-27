@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  
+</head>
+<body>
+  <div class="content">
+    <input type="text", id="requestField" placeholder="insert your text here">
+    <button type="button" id="generateButton">create video</button>
+  </div>
+</body>
+<style>
+  *, *::before, *::after{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  :root{
+    font-size: 16px;
+  }
+  html, body{
+    width: 100%;
+    height: 100%;
+  }
+  body{
+    background-color: rgb(64, 224, 208);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .content{
+    width: 30%;
+    height: 30%;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  #requestField{
+    width: 80%;
+    padding: 1rem;
+  }
+  #requestField:focus{
+    border: 2px solid black;
+  }
+  #generateButton{
+    width: 40%;
+    padding: 0.5rem;
+    background-color: rgb(64, 224, 208);
+    color: white;
+    font-size: 1.5rem;
+  }
+
+</style>
+<script>
+  const inputField = document.getElementById("requestField");
+  const generateButton = document.getElementById("generateButton");
+
+  generateButton.addEventListener('click', (event) => {
+    console.log('button clicked');
+    const text = inputField.value;
+    console.log(text);
+    if(text !== ''){
+      fetch(`http://localhost:8000/running-line/video/?text=${text}`)
+        .then(response => {
+          console.log(`Requested video with text ${text}`);
+          return response.blob()
+        })
+        .then(blob => {
+          const file = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+            a.href = file;
+            a.download = "line.mp4"; // Set the filename for the download
+            document.body.appendChild(a); // Append the link to the body
+            a.click(); // Trigger the download
+            document.body.removeChild(a); // Remove the link from the DOM
+        })
+        .catch((err)=>{
+          console.log(err);
+        });
+    }
+  });
+</script>
+</html>
