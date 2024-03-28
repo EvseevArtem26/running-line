@@ -8,7 +8,6 @@ import os
 import datetime
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
-print ("URL: ", str(os.getenv('MONGODB_URI')))
 client = MongoClient(str(os.getenv('MONGODB_URI')), server_api=ServerApi('1'))
 
 
@@ -23,7 +22,6 @@ def serve_video(request):
             "text": request.GET.get('text', ''),
             "time": datetime.datetime.now(datetime.timezone.utc)
         })
-        print(result.inserted_id)
     except Exception as e:
         print(e)
 

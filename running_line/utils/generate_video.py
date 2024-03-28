@@ -22,5 +22,4 @@ def generate_video(text):
                 background,
                 moving_txt],
                 size = moviesize)
-        print("DIR: ", os.listdir('./'))
         final.set_duration(3).write_videofile("./running_line/video/line.mp4", fps=30, codec="libx264")
