@@ -1,5 +1,6 @@
 import os
 os.environ["IMAGEMAGICK_BINARY"] = f"{os.getcwd()}/running_line/utils/squashfs-root/AppRun"
+os.environ["LD_LIBRARY_PATH"] = f"{os.getcwd()}/running_line/utils/squashfs-root/usr/lib"
 from moviepy.editor import *
 
 def generate_video(text):
