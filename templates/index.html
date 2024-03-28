@@ -68,7 +68,7 @@
     const text = inputField.value;
     console.log(text);
     if(text !== ''){
-      fetch(`http://localhost:8000/running-line/video/?text=${text}`)
+      fetch(`../video/?text=${text}`)
         .then(response => {
           console.log(`Requested video with text ${text}`);
           return response.blob()
