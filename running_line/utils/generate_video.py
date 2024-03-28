@@ -1,5 +1,5 @@
 import os
-os.environ["IMAGEMAGICK_BINARY"] = "/usr/bin/magick"
+os.environ["IMAGEMAGICK_BINARY"] = f"{os.getcwd()}/running_line/utils/magick"
 from moviepy.editor import *
 
 def generate_video(text):
