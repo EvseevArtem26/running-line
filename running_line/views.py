@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseServerError
 from wsgiref.util import FileWrapper
 from .utils.generate_video import generate_video
 from django.shortcuts import render
@@ -24,11 +24,15 @@ def serve_video(request):
         })
     except Exception as e:
         print(e)
-
-    generate_video(request.GET.get('text', ''))
-    video_path = "./running_line/video/line.mp4" # Adjust the path to your video file
-    file_wrapper = FileWrapper(open(video_path, 'rb'))
-    response = HttpResponse(file_wrapper, content_type='video/mp4')
-    response['Content-Disposition'] = 'attachment; filename=line.mp4' # Use 'inline' to play in the browser
-    return response
+    try:
+        generate_video(request.GET.get('text', ''))
+        video_path = "./running_line/video/line.mp4" # Adjust the path to your video file
+        file_wrapper = FileWrapper(open(video_path, 'rb'))
+        response = HttpResponse(file_wrapper, content_type='video/mp4')
+        response['Content-Disposition'] = 'attachment; filename=line.mp4' # Use 'inline' to play in the browser
+        return response
+    except Exception as e:
+        print("Request: ", request.GET)
+        print("Error: ", e)
+        return HttpResponseServerError()
 
