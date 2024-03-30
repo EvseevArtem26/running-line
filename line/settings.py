@@ -30,6 +30,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
   "localhost",
+  "127.0.0.1",
   ".render.com",
   "running-line.onrender.com",
   ".onrender.com"

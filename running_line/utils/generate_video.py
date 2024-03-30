@@ -1,6 +1,6 @@
 import os
-os.environ["IMAGEMAGICK_BINARY"] = f"{os.getcwd()}/running_line/utils/squashfs-root/AppRun"
-os.environ["LD_LIBRARY_PATH"] = f"{os.getcwd()}/running_line/utils/squashfs-root/usr/lib"
+# os.environ["IMAGEMAGICK_BINARY"] = f"{os.getcwd()}/../temp/ImageMagick-7.1.1-29"
+# os.environ["LD_LIBRARY_PATH"] = f"{os.getcwd()}/running_line/utils/squashfs-root/usr/lib"
 from moviepy.editor import *
 
 def generate_video(text):
@@ -13,7 +13,7 @@ def generate_video(text):
         txt = text
 
         clip_txt = TextClip(txt,color='white', align='West',fontsize=90,
-                        font='Ubuntu-Bold', method='label')
+                        font='Ubuntu', method='label')
         txt_width = clip_txt.size[0]
         txt_speed = (w + txt_width) // 3
 
