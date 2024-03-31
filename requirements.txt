@@ -28,5 +28,6 @@ sqlparse==0.4.4
 tifffile==2024.2.12
 tqdm==4.66.2
 typing_extensions==4.10.0
+tzdata==2024.1
 urllib3==2.2.1
 uvicorn==0.29.0
